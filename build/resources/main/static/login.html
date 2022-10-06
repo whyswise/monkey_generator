@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+<style type="text/css">
+	button{
+		width : 400px;
+		margin-block : 20px;
+	}
+	div
+	{
+		width: 500px;
+		background-color: skyblue;
+		text-align: center;
+	}
+	@media ( max-height: 300px ){
+		div{display:none;}
+	}
+	span
+	{
+		width : 100px;
+		margin: 20px;
+		display: inline-block;
+	}
+	input
+	{
+		width : 250px;
+		margin: 20px;
+	}
+	body
+	{
+		height : 98vh;
+		display : flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		min-height: 250px;
+	}
+</style>
+</head>
+<body>
+<div>
+<form action="login" method="post">
+<span>아이디</span><input name="id" type="text"><br>
+<span>패스워드</span><input name="pw" type="password"><br>
+<button type="submit">로그인</button>
+</form>
+</div>
+</body>
+</html>
