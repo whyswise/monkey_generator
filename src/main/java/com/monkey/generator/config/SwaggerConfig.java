@@ -21,7 +21,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Slf4j
 @Configuration
-@EnableWebMvc
 @Import(SpringDataRestConfiguration.class)
 public class SwaggerConfig {
 

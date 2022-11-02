@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @ToString
+@Getter @Setter @ToString 
 public class Luckgetmon {
 	private int id;
 	private String owner;
@@ -20,4 +20,7 @@ public class Luckgetmon {
 	private int d;
 	private int s;
 	private int hp;
+	private String name;
+	private String type;
+	private String type2;
 }

@@ -1,9 +1,11 @@
 package com.monkey.generator.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter @Setter @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Dict {
 	private int id;
 	private String name;
@@ -16,4 +18,10 @@ public class Dict {
 	private int c;
 	private int d;
 	private int s;
+	private Integer max_h;
+	private Integer max_a;
+	private Integer max_b;
+	private Integer max_c;
+	private Integer max_d;
+	private Integer max_s;
 }
