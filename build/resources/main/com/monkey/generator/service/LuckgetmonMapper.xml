@@ -13,7 +13,7 @@
     	INSERT INTO `luckgetmon_bug`.`luckgetmon_owner` (`owner`, `nickname`, `level`, `exp`, `gender`, `dict_num`, `h`, `a`, `b`, `c`, `d`, `s`, `hp`) VALUES (#{owner}, #{nickname}, #{level}, #{exp}, #{gender}, #{dict_num}, #{h}, #{a}, #{b}, #{c}, #{d}, #{s}, #{hp});
     </insert>
     <select id="viewMyLuckgetmon" parameterType="String" resultType="Luckgetmon">
-    	SELECT * FROM luckgetmon_bug.luckgetmon_owner where owner = #{owner};
+    	SELECT mon.*, info.name,info.type,info.type2 FROM luckgetmon_bug.luckgetmon_owner as mon join luckgetmon_info as info on mon.dict_num=info.id where owner = #{owner};
     </select>
     <update id="changeNickname" parameterType="Luckgetmon">
     	UPDATE `luckgetmon_bug`.`luckgetmon_owner` SET `nickname` = #{nickname} WHERE (`id` = #{id} and `owner` = #{owner});
@@ -21,4 +21,38 @@
     <update id="changeOwner" parameterType="HashMap">
     	UPDATE `luckgetmon_bug`.`luckgetmon_owner` SET `owner` = #{new_owner} WHERE (`id` = #{luckgetmon.id} and `owner` = #{luckgetmon.owner});
     </update>
+    <insert id="newOwner" parameterType="String">
+    	INSERT INTO `luckgetmon_bug`.`owner_info` (`id`) VALUES (#{id});
+    </insert>
+    <select id="infoOwner" parameterType="String" resultType="Owner">
+    	SELECT * FROM luckgetmon_bug.owner_info where id = #{owner};
+    </select>
+    <select id="viewAllItems" resultType="Item">
+    	SELECT * FROM luckgetmon_bug.item_list where useyn = 1;
+    </select>
+    <select id="myItemCheck" parameterType="Bag" resultType="Bag">
+    	SELECT count(*) as count, ea FROM luckgetmon_bug.owner_bag where owner = #{owner} and item = #{item};
+    </select>
+    <insert id="insertItem" parameterType="Bag">
+    	INSERT INTO `luckgetmon_bug`.`owner_bag` (`owner`, `item`, `ea`) VALUES (#{owner}, #{item}, #{ea});
+    </insert>
+    <update id="addItem" parameterType="Owner">
+    	UPDATE `luckgetmon_bug`.`owner_bag` SET `ea` = ea+#{ea} WHERE (`item` = #{item} and `owner` = #{owner});
+    </update>
+    <select id="viewMyItems" parameterType="String" resultType="Item">
+    	SELECT bag.id, owner.id as owner, item.item_name, item.description, bag.ea  FROM luckgetmon_bug.owner_bag as bag join owner_info as owner on bag.owner=owner.id join item_list as item on bag.item=item.id where bag.owner = #{owner};
+    </select>
+    <update id="addMoney" parameterType="Owner">
+    	UPDATE `luckgetmon_bug`.`owner_info` SET `clover` = clover+#{clover} WHERE (`id` = #{id});
+    </update>
+    <update id="recoveryLuckgetmon" parameterType="String">
+    	UPDATE `luckgetmon_bug`.`luckgetmon_owner` SET `hp` = h WHERE (`owner` = #{owner});
+    </update>
+    <select id="fullHpCheck" parameterType="String" resultType="_int">
+    	SELECT count(*) FROM luckgetmon_bug.luckgetmon_owner where owner=#{owner} and (h=hp)=0;
+    </select>
+    <update id="setHp" parameterType="Luckgetmon">
+    	UPDATE `luckgetmon_bug`.`luckgetmon_owner` SET `hp` = #{hp} WHERE (`id` = #{id});
+    </update>
+    
 </mapper>
